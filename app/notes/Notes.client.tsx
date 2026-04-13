@@ -70,10 +70,12 @@ export default function NotesClient({ tag = 'all' }: { tag?: string }) {
   return (
     <div className={css.wrapper}>
       <div className={css.toolbar}>
-        <SearchBox onSearch={debouncedSearch} initialValue={search} />
+        <div className={css.search}>
+          <SearchBox onSearch={debouncedSearch} initialValue={search} />
+        </div>
 
         {totalPages > 1 && (
-          <div className={css.center}>
+          <div className={css.pagination}>
             <Pagination
               page={page}
               totalPages={totalPages}
@@ -82,9 +84,11 @@ export default function NotesClient({ tag = 'all' }: { tag?: string }) {
           </div>
         )}
 
-        <button className={css.createButton} onClick={() => setIsOpen(true)}>
-          Create Note +
-        </button>
+        <div className={css.createWrapper}>
+          <button className={css.createButton} onClick={() => setIsOpen(true)}>
+            Create Note +
+          </button>
+        </div>
       </div>
 
       <div className={css.notes}>

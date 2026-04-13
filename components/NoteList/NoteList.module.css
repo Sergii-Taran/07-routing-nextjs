@@ -4,10 +4,11 @@
   gap: 16px;
 
   padding: 0;
-  margin: 24px auto;
+  /* margin: 24px auto; */
   list-style: none;
 
-  max-width: 1200px;
+  /* max-width: 1200px; */
+  width: 100%;
 }
 
 .listWrapper {
