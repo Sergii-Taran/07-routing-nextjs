@@ -1,3 +1,5 @@
+import NotesClient from '@/app/notes/Notes.client';
+
 interface Props {
   params: Promise<{
     slug: string[];
@@ -9,5 +11,5 @@ export default async function FilterPage({ params }: Props) {
 
   const tag = slug?.[0] || 'all';
 
-  return <h2>Selected tag: {tag}</h2>;
+  return <NotesClient tag={tag} />;
 }
