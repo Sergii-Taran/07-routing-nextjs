@@ -1,36 +1,138 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📝 NoteHub (Next.js App Router)
 
-## Getting Started
+A modern note-taking web application built with **Next.js App Router**, featuring advanced routing patterns, modal navigation, and a clean UI.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🚀 Live Features
+
+- 📋 View notes list
+- 🔍 Search notes
+- 🏷 Filter notes by tag
+- ➕ Create new notes
+- 🗑 Delete notes
+- 📄 View note details
+- 🪟 Modal preview with routing (intercepting routes)
+
+---
+
+## 🧠 Tech Stack
+
+- **Next.js (App Router)**
+- **React**
+- **TypeScript**
+- **TanStack Query (React Query)**
+- **Axios**
+- **CSS Modules**
+
+---
+
+## 🗂 Project Structure
+
+```
+app/
+  notes/
+    layout.tsx
+
+    @sidebar/
+      default.tsx
+
+    @modal/
+      default.tsx
+      (.)[id]/page.tsx
+
+    page.tsx
+    [id]/page.tsx
+
+    filter/
+      [...slug]/page.tsx
+
+components/
+  Modal/
+  NotePreview/
+
+lib/
+  api.ts
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🔥 Key Features Explained
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 1. Advanced Routing
 
-## Learn More
+- Catch-all routes: `/notes/filter/[...slug]`
+- Parallel routes: `@sidebar`, `@modal`
+- Intercepting routes for modal navigation
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 2. Modal via Routing
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Clicking a note opens a modal (`/notes/[id]`)
+- Page content stays in the background
+- Refresh opens full page
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 3. Navigation Behavior
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- ESC closes modal
+- Click outside closes modal
+- Browser back button closes modal
+- Returns to the previous route (e.g. `/notes/filter/Work`)
+
+---
+
+### 4. Server + Client Data Fetching
+
+- Server-side prefetch with React Query
+- Hydration via `HydrationBoundary`
+- Client-side cache reuse
+
+---
+
+## 📦 API
+
+Uses external API:
+
+```
+https://notehub-public.goit.study/api
+```
+
+Authorization via token:
+
+```
+NEXT_PUBLIC_NOTEHUB_TOKEN
+```
+
+---
+
+## ⚙️ Installation
+
+```bash
+npm install
+npm run dev
+```
+
+---
+
+## 📌 Notes
+
+- Built using Next.js App Router best practices
+- Implements production-like UX patterns
+- Clean separation of server and client logic
+
+---
+
+## 👨‍💻 Author
+
+Developed as part of a FullStack learning journey.
+
+---
+
+## ✅ Status
+
+✔ Fully functional
+✔ Ready for review
+✔ Matches technical requirements
