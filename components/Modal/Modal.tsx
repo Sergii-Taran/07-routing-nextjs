@@ -1,98 +1,36 @@
-// 'use client';
-
-// import { useEffect } from 'react';
-// import { createPortal } from 'react-dom';
-
-// import css from './Modal.module.css';
-
-// interface ModalProps {
-//   children: React.ReactNode;
-//   onClose: () => void;
-// }
-
-// export default function Modal({ children, onClose }: ModalProps) {
-//   useEffect(() => {
-//     const handleEsc = (e: KeyboardEvent) => {
-//       if (e.key === 'Escape') onClose();
-//     };
-
-//     window.addEventListener('keydown', handleEsc);
-
-//     document.body.style.overflow = 'hidden';
-
-//     return () => {
-//       window.removeEventListener('keydown', handleEsc);
-
-//       document.body.style.overflow = '';
-//     };
-//   }, [onClose]);
-
-//   return createPortal(
-//     <div className={css.backdrop} onClick={onClose}>
-//       <div className={css.modal} onClick={(e) => e.stopPropagation()}>
-//         {children}
-//       </div>
-//     </div>,
-//     document.body
-//   );
-// }
-
 'use client';
 
-import { useEffect, ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
+import type { MouseEvent, ReactNode } from 'react';
+
 import css from './Modal.module.css';
 
-interface Props {
+interface ModalProps {
   children: ReactNode;
-  onClose?: () => void; // 👈 нове
+  onClose?: () => void;
 }
 
-export default function Modal({ children, onClose }: Props) {
+export default function Modal({ children, onClose }: ModalProps) {
   const router = useRouter();
 
-  const handleClose = () => {
+  const closeModal = () => {
     if (onClose) {
-      onClose(); // для create modal
-    } else {
-      router.back(); // для intercepting modal
+      onClose();
+      return;
     }
+
+    router.back();
   };
 
-  // 🔒 scroll lock
-  useEffect(() => {
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, []);
-
-  // ⌨️ ESC
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        handleClose();
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
-
-  // 🖱 backdrop
-  const handleBackdropClick = () => {
-    handleClose();
-  };
-
-  const handleContentClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const handleBackdropClick = (event: MouseEvent<HTMLDivElement>) => {
+    if (event.target === event.currentTarget) {
+      closeModal();
+    }
   };
 
   return (
     <div className={css.backdrop} onClick={handleBackdropClick}>
-      <div className={css.modal} onClick={handleContentClick}>
-        {children}
-      </div>
+      <div className={css.modal}>{children}</div>
     </div>
   );
 }

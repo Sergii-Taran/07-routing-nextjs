@@ -1,4 +1,4 @@
-.input {
+/* .input {
   height: 40px;
   padding: 0 12px;
 
@@ -8,4 +8,11 @@
   border-radius: 6px;
 
   max-width: 260px;
+} */
+
+.input {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ced4da;
+  min-width: 240px;
 }

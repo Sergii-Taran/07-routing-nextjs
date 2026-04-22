@@ -1,21 +1,30 @@
-import TanStackProvider from '@/components/TanStackProvider/TanStackProvider';
-import Header from '@/components/Header/Header';
-import Footer from '@/components/Footer/Footer';
-import { Toaster } from 'react-hot-toast';
+import type { Metadata } from 'next';
 
-export default function RootLayout({
-  children,
-}: {
+import Footer from '@/components/Footer/Footer';
+import Header from '@/components/Header/Header';
+import TanStackProvider from '@/components/TanStackProvider/TanStackProvider';
+
+import './globals.css';
+
+export const metadata: Metadata = {
+  title: 'NoteHub',
+  description:
+    'Notes app with App Router, parallel routes, and modal previews.',
+};
+
+interface RootLayoutProps {
   children: React.ReactNode;
-}) {
+  modal: React.ReactNode;
+}
+
+export default function RootLayout({ children, modal }: RootLayoutProps) {
   return (
     <html lang="en">
       <body>
         <TanStackProvider>
           <Header />
-          <Toaster position="top-right" />
-
           {children}
+          {modal}
           <Footer />
         </TanStackProvider>
       </body>

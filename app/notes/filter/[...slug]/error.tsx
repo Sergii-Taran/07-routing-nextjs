@@ -10,7 +10,7 @@ interface ErrorProps {
 export default function Error({ error, reset }: ErrorProps) {
   return (
     <div className={css.wrapper}>
-      <h2 className={css.title}>Failed to load note details.</h2>
+      <h2 className={css.title}>Failed to load notes.</h2>
       <p className={css.message}>{error.message}</p>
       <button type="button" onClick={reset} className={css.button}>
         Try again

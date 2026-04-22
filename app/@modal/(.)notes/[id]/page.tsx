@@ -5,17 +5,17 @@ import { noteByIdQueryOptions } from '@/lib/api';
 import { createQueryClient } from '@/lib/query-client';
 import type { Note } from '@/types/note';
 
-import NoteDetailsClient from './NoteDetails.client';
+import NotePreviewClient from './NotePreview.client';
 
-interface NoteDetailsPageProps {
+interface NotePreviewModalPageProps {
   params: Promise<{
     id: string;
   }>;
 }
 
-export default async function NoteDetailsPage({
+export default async function NotePreviewModalPage({
   params,
-}: NoteDetailsPageProps) {
+}: NotePreviewModalPageProps) {
   const { id } = await params;
   const queryClient = createQueryClient();
 
@@ -30,7 +30,7 @@ export default async function NoteDetailsPage({
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <NoteDetailsClient noteId={id} />
+      <NotePreviewClient noteId={id} />
     </HydrationBoundary>
   );
 }
