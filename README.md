@@ -1,138 +1,94 @@
-# 📝 NoteHub (Next.js App Router)
+📝 NoteHub
 
-A modern note-taking web application built with **Next.js App Router**, featuring advanced routing patterns, modal navigation, and a clean UI.
+NoteHub is a modern note-taking web application built with Next.js App Router, featuring advanced routing patterns and a smooth user experience.
 
----
+🚀 Features
+📋 Browse notes list
+🏷️ Filter notes by tag
+🔎 Search notes
+📄 Pagination
+➕ Create new notes
+👁️ View note details:
+as a standalone page
+as a modal (without losing list context)
 
-## 🚀 Live Features
+🧠 Architecture
 
-- 📋 View notes list
-- 🔍 Search notes
-- 🏷 Filter notes by tag
-- ➕ Create new notes
-- 🗑 Delete notes
-- 📄 View note details
-- 🪟 Modal preview with routing (intercepting routes)
+This project demonstrates advanced Next.js App Router capabilities:
 
----
+app/notes/filter/[...slug] — notes list page
+app/notes/[id] — note details page
+app/@modal/(..)notes/[id] — modal preview (intercepted route)
+@sidebar — parallel route for filters
 
-## 🧠 Tech Stack
+🧩 Tech Stack
+Next.js (App Router)
+React
+TypeScript
+@tanstack/react-query
+Axios
+Formik + Yup
+React Paginate
 
-- **Next.js (App Router)**
-- **React**
-- **TypeScript**
-- **TanStack Query (React Query)**
-- **Axios**
-- **CSS Modules**
+📦 Installation
+git clone https://github.com/your-username/notehub.git
+cd notehub
+npm install
 
----
+⚙️ Environment Variables
 
-## 🗂 Project Structure
+Create a .env.local file:
 
-```
+NEXT_PUBLIC_NOTEHUB_TOKEN=your_token_here
+
+If no token is provided, the app falls back to email-based authentication.
+
+▶️ Run the App
+npm run dev
+
+Open in browser:
+
+http://localhost:3000
+
+🧪 Routes Overview
+/ — Home page
+/notes/filter/all — all notes
+/notes/filter/Work — filtered notes
+/notes/[id] — note details page
+Modal preview opens from the list via intercepted routes
+
+🪟 Modal Preview (Key Feature)
+Built with Intercepted Routes
+URL updates without full page reload
+Preserves background (notes list)
+Supports:
+browser back navigation
+direct URL access
+
+📁 Project Structure
 app/
-  notes/
-    layout.tsx
-
-    @sidebar/
-      default.tsx
-
-    @modal/
-      default.tsx
-      (.)[id]/page.tsx
-
-    page.tsx
-    [id]/page.tsx
-
-    filter/
-      [...slug]/page.tsx
+notes/
+filter/
+[...slug]/
+@sidebar/
+@modal/
+(..)notes/[id]/
 
 components/
-  Modal/
-  NotePreview/
-
 lib/
-  api.ts
-```
+types/
+⚠️ Known Issues
 
----
+Console warning:
 
-## 🔥 Key Features Explained
+We are cleaning up async info...
 
-### 1. Advanced Routing
+This is related to React DevTools and does not affect the application.
 
-- Catch-all routes: `/notes/filter/[...slug]`
-- Parallel routes: `@sidebar`, `@modal`
-- Intercepting routes for modal navigation
+👨‍💻 Author
 
----
+Sergii Taran
 
-### 2. Modal via Routing
+📄 License
 
-- Clicking a note opens a modal (`/notes/[id]`)
-- Page content stays in the background
-- Refresh opens full page
-
----
-
-### 3. Navigation Behavior
-
-- ESC closes modal
-- Click outside closes modal
-- Browser back button closes modal
-- Returns to the previous route (e.g. `/notes/filter/Work`)
-
----
-
-### 4. Server + Client Data Fetching
-
-- Server-side prefetch with React Query
-- Hydration via `HydrationBoundary`
-- Client-side cache reuse
-
----
-
-## 📦 API
-
-Uses external API:
-
-```
-https://notehub-public.goit.study/api
-```
-
-Authorization via token:
-
-```
-NEXT_PUBLIC_NOTEHUB_TOKEN
-```
-
----
-
-## ⚙️ Installation
-
-```bash
-npm install
-npm run dev
-```
-
----
-
-## 📌 Notes
-
-- Built using Next.js App Router best practices
-- Implements production-like UX patterns
-- Clean separation of server and client logic
-
----
-
-## 👨‍💻 Author
-
-Developed as part of a FullStack learning journey.
-
----
-
-## ✅ Status
-
-✔ Fully functional
-✔ Ready for review
-✔ Matches technical requirements
+MIT
